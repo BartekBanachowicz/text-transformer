@@ -11,8 +11,8 @@
         <version>2.3.3.RELEASE</version>
     </parent>
 
-    <groupId>pl.put.poznan.transformer</groupId>
-    <artifactId>text-transformer</artifactId>
+    <groupId>pl.put.poznan</groupId>
+    <artifactId>transformer</artifactId>
     <version>0.1</version>
 
 	<properties>
