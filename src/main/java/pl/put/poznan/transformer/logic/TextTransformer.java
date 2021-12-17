@@ -11,9 +11,8 @@ public class TextTransformer {
     public String transform(String text){
 
         Transformer resultTransformer = new TextHolder(text);
-        String[] transformations = transforms[0].split(",");
 
-        for (String transformation : transformations) {
+        for (String transformation : transforms) {
 
             switch (transformation) {
                 case "ToUpper":
