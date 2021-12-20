@@ -7,11 +7,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TextTransformerTest {
     private TextTransformer transformer;
-    private String text = "MOIm zDAniEm to NIE ma TaK, że doBRZe albo że nie DOBrze!";
+    private final String text = "MOIm zDAniEm to NIE ma TaK, że doBRZe albo że nie DOBrze!";
 
     @Test
     void testTransform_toUpperGiven_expectingSuccess() {
         String[] transforms = {"ToUpper"};
+        transformer = new TextTransformer(transforms);
         String result = transformer.transform(text);
 
         assertEquals(result, "MOIM ZDANIEM TO NIE MA TAK, ŻE DOBRZE ALBO ŻE NIE DOBRZE!");
