@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import java.util.Objects;
 
-public class replaceNumbers extends TextTransformer {
+public class replaceNumbers extends TextDecorator {
 
     private HashMap<String, String> numbers = new HashMap<String, String>();
 
