@@ -22,6 +22,7 @@ public class TextTransformer {
                 case "ToLower":
                     break;
                 case "Capitalize":
+                    resultTransformer = new Capitalize(resultTransformer);
                     break;
                 case "Invert":
                     break;
