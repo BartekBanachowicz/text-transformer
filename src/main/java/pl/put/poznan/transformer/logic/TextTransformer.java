@@ -1,8 +1,5 @@
 package pl.put.poznan.transformer.logic;
 
-/**
- * This is just an example to show that the logic should be outside the REST service.
- */
 public class TextTransformer {
 
     private final String[] transforms;
@@ -12,7 +9,38 @@ public class TextTransformer {
     }
 
     public String transform(String text){
-        // of course, normally it would do something based on the transforms
-        return text.toUpperCase();
+
+        Transformer resultTransformer = new TextHolder(text);
+
+        for (String transformation : transforms) {
+
+            switch (transformation) {
+                case "ToUpper":
+                    resultTransformer = new ToUpper(resultTransformer);
+                    break;
+                case "ToLower":
+                    break;
+                case "Capitalize":
+                    break;
+                case "Invert":
+                    break;
+                case "ReplaceNumbers":
+                    break;
+                case "ReplaceShortcuts":
+                    break;
+                case "ReplaceFullWords":
+                    break;
+                case "ToLatex":
+                    break;
+                case "DeleteMultipiedWords":
+                    break;
+                case "ToColor":
+                    break;
+                default:
+                    return text;
+            }
+        }
+
+        return resultTransformer.GetText();
     }
 }
