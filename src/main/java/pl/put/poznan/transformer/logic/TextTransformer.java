@@ -20,6 +20,7 @@ public class TextTransformer {
                     resultTransformer = new ToUpper(resultTransformer);
                     break;
                 case "ToLower":
+                    resultTransformer = new ToLower(resultTransformer);
                     break;
                 case "Capitalize":
                     resultTransformer = new Capitalize(resultTransformer);
