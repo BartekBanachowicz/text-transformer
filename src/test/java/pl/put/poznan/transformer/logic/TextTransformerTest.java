@@ -34,4 +34,13 @@ class TextTransformerTest {
 
         assertEquals(result, "MOIm zDAniEm to NIE ma TaK, że doBRZe albo że nie DOBrze!");
     }
+
+    @Test
+    void testTransform_invertGiven_ExpectingSuccess() {
+        String[] transforms = {"Invert"};
+        transformer = new TextTransformer(transforms);
+        String result = transformer.transform(text);
+
+        assertEquals(result, "!EZrboD eiN eż oBLA ezrBoD eż ,kaT Am ein ot meinaDZ miom");
+    }
 }
