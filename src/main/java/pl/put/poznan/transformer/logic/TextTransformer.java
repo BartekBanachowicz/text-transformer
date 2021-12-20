@@ -59,14 +59,6 @@ public class TextTransformer {
                     break;
                 case "ReplaceFullWords":
                     break;
-                case "ToLatex":
-                    break;
-                case "DeleteMultipiedWords":
-                    break;
-                case "ToColor":
-                    break;
-                default:
-                    return text;
             }
         }
 
