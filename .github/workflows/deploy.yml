@@ -20,3 +20,12 @@ jobs:
         run: mvn --batch-mode --update-snapshots deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Generate javadoc
+        run: mvn javadoc:javadoc
+      - name: Publish javadoc
+        uses: crazy-max/ghaction-github-pages@v2.5.0
+        with:
+          target_branch: gh-pages
+          build_dir: target/site
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
