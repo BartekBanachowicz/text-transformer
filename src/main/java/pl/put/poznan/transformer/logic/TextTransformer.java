@@ -29,8 +29,10 @@ public class TextTransformer {
                     resultTransformer = new ReplaceNumbers(resultTransformer);
                     break;
                 case "ReplaceShortcuts":
+                    resultTransformer = new ReplaceShortcuts(resultTransformer);
                     break;
                 case "ReplaceFullWords":
+                    resultTransformer = new ReplaceFullWords(resultTransformer);
                     break;
                 case "ToLatex":
                     break;
