@@ -52,12 +52,16 @@ public class TextTransformer {
                     resultTransformer = new Capitalize(resultTransformer);
                     break;
                 case "Invert":
+                    resultTransformer = new Invert(resultTransformer);
                     break;
                 case "ReplaceNumbers":
+                    resultTransformer = new ReplaceNumbers(resultTransformer);
                     break;
                 case "ReplaceShortcuts":
+                    resultTransformer = new ReplaceShortcuts(resultTransformer);
                     break;
                 case "ReplaceFullWords":
+                    resultTransformer = new ReplaceFullWords(resultTransformer);
                     break;
             }
         }
