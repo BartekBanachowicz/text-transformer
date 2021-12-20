@@ -4,13 +4,16 @@ import java.util.HashMap;
 
 import java.util.Objects;
 
-public class replaceNumbers extends TextDecorator {
+public class ReplaceNumbers extends TextDecorator {
 
     private HashMap<String, String> numbers = new HashMap<String, String>();
 
-    public replaceNumbers(Transformer t) {
+    private SplitToWords splitClass;
+
+    public ReplaceNumbers(Transformer t) {
         super(t);
         load();
+        splitClass = new SplitToWords();
     }
 
     private boolean isNumber(String s) {
@@ -19,7 +22,7 @@ public class replaceNumbers extends TextDecorator {
 
     private String toStr(String s, boolean zero) {
         String[] ns = s.split("");
-        String result = null;
+        String result = "";
         boolean isZero = true;
 
         for (int i = ns.length-1; i>=0; i--) {
@@ -77,11 +80,13 @@ public class replaceNumbers extends TextDecorator {
     }
 
     @Override
-    public String getText() {
-        String[] tab = splitToWords(super.getText());
-        String newString = null;
+    public String GetText() {
+        String[] tab = splitClass.split(super.GetText());
+        String newString = "";
+
 
         for (String s : tab) {
+
             if (isNumber(s)) {
                 String[] minusString = s.split("-");
                 String afMinString = null;
@@ -99,14 +104,24 @@ public class replaceNumbers extends TextDecorator {
                 if(comma.length == 2) {
                     newString += " i ";
                     newString += toStr(comma[1], true);
+                    if(comma[1].length() == 1) {
+                        newString += " dziesiątych";
+                    }
+                    else if (comma[1].length() == 2) {
+                        newString += " setnych";
+                    }
+                    else {
+                        newString += " tysięcznych";
+                    }
                 }
+                newString += " ";
 
             } else {
                 newString += s + " ";
             }
         }
 
-        return newString;
+        return newString.trim();
     }
 
     private void load() {

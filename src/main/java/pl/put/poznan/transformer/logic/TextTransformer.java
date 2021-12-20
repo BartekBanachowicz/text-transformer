@@ -26,6 +26,7 @@ public class TextTransformer {
                     resultTransformer = new Invert(resultTransformer);
                     break;
                 case "ReplaceNumbers":
+                    resultTransformer = new ReplaceNumbers(resultTransformer);
                     break;
                 case "ReplaceShortcuts":
                     break;
