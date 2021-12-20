@@ -69,7 +69,7 @@ public class replaceNumbers extends TextTransformer {
                 }
 
             } else {
-                newString += s;
+                newString += s + " ";
             }
         }
 
