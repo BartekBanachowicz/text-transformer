@@ -17,7 +17,7 @@ package pl.put.poznan.transformer.logic;
  */
 public class TextTransformer {
     /**
-     * Valid transform names
+     * valid transform names
      */
     private final String[] transforms;
 
@@ -31,7 +31,7 @@ public class TextTransformer {
     }
 
     /**
-     * Applies transforms defined in {@link TextTransformer#transforms} to a given <code>String</code>
+     * Applies transforms defined in {@link TextTransformer#transforms} attribute on a given <code>String</code>
      *
      * @param text text scheduled for transformation
      * @return transformed text
