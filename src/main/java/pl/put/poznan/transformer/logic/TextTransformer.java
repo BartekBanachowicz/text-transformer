@@ -8,6 +8,8 @@ public class TextTransformer {
         this.transforms = transforms;
     }
 
+    public static final FindInDictionary dictionary = new FindInDictionary();
+
     public String transform(String text){
 
         Transformer resultTransformer = new TextHolder(text);

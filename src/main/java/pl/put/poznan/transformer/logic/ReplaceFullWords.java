@@ -1,21 +1,20 @@
 package pl.put.poznan.transformer.logic;
 
+import static pl.put.poznan.transformer.logic.TextTransformer.dictionary;
+
 public class ReplaceFullWords extends TextDecorator {
 
+
     private String replace(String text){
-        SplitToWords splitter = new SplitToWords();
 
-        String result = "";
+        String[] keySet = dictionary.getListOfWords();
 
-        String [] words = splitter.split(text);
-
-        for(String word : words){
-            //TODO - FindInDictionaryAndReplace
+        for(String word : keySet){
+            if(text.contains(word)) {
+                text = text.replaceAll(word, dictionary.getShortcut(word));
+            }
         }
 
-        //TODO - Add mergeStringsToText when method ready in SplitToWords class
-
-        //TODO - Change ReplaceFullWords.replace output when method ready
         return text;
     }
 

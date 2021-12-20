@@ -1,22 +1,23 @@
 package pl.put.poznan.transformer.logic;
 
+import static pl.put.poznan.transformer.logic.TextTransformer.dictionary;
+
 public class ReplaceShortcuts extends TextDecorator{
 
     private String replace(String text){
         SplitToWords splitter = new SplitToWords();
 
-        String result = "";
+        String result;
 
         String [] words = splitter.split(text);
 
-        for(String word : words){
-            //TODO - FindInDictionaryAndReplace
+        for(int i = 0; i< words.length; i++){
+            words[i] = dictionary.findWordAndReplace(words[i]);
         }
 
-        //TODO - Add mergeStringsToText when method ready in SplitToWords class
+        result = splitter.mergeToText(words);
 
-        //TODO - Change ReplaceShortcuts.replace output when method ready
-        return text;
+        return result;
     }
 
     public ReplaceShortcuts(Transformer t) {super(t);}
