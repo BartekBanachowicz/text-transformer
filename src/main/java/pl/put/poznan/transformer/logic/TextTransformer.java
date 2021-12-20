@@ -23,6 +23,7 @@ public class TextTransformer {
                 case "Capitalize":
                     break;
                 case "Invert":
+                    resultTransformer = new Invert(resultTransformer);
                     break;
                 case "ReplaceNumbers":
                     break;
