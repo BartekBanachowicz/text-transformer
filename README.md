@@ -1,6 +1,6 @@
 # text-transformer
 
-![maven](https://github.com/BartekBanachowicz/text-transformer/actions/workflows/maven.yml/badge.svg)
+![verify](https://github.com/BartekBanachowicz/text-transformer/actions/workflows/verify.yml/badge.svg)
 
 Dla osób pracujących z danymi tekstowymi nasza aplikacja Text Transformer umożliwi transformacje danych tekstowych (np. zmiana wielkości liter, eliminacja duplikatów, itd.). Aplikacja będzie dostępna poprzez GUI a także zdalne API dzięki czemu będzie można ją zintegrować z istniejącymi narzędziami.
 
