@@ -86,7 +86,7 @@ public class ReplaceNumbers extends TextDecorator {
 
 
         for (String s : tab) {
-
+            System.out.println(s);
             if (isNumber(s)) {
                 String[] minusString = s.split("-");
                 String afMinString = null;
@@ -121,7 +121,9 @@ public class ReplaceNumbers extends TextDecorator {
             }
         }
 
-        return newString.trim();
+        newString = newString.substring(0, newString.length() - 1);
+        //return newString.trim();
+        return newString;
     }
 
     private void load() {
