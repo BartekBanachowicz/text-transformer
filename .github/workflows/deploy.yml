@@ -1,4 +1,4 @@
-name: Publish package to GitHub Packages
+name: Deploy to GitHub
 
 on:
   release:
@@ -22,7 +22,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Generate javadoc
-        run: mvn javadoc:javadoc
+        run: mvn --batch-mode javadoc:javadoc
       - name: Publish javadoc
         uses: crazy-max/ghaction-github-pages@v2.5.0
         with:
