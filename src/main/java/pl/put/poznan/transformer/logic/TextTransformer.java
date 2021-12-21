@@ -30,6 +30,9 @@ public class TextTransformer {
         this.transforms = transforms;
     }
 
+    public static final FindInDictionary dictionary = new FindInDictionary();
+    public static final SplitToWords splitter = new SplitToWords();
+
     /**
      * Applies transforms defined in {@link TextTransformer#transforms} attribute on a given <code>String</code>
      *
