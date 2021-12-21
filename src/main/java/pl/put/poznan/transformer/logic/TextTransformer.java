@@ -9,6 +9,7 @@ public class TextTransformer {
     }
 
     public static final FindInDictionary dictionary = new FindInDictionary();
+    public static final SplitToWords splitter = new SplitToWords();
 
     public String transform(String text){
 

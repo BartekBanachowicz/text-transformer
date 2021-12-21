@@ -1,11 +1,11 @@
 package pl.put.poznan.transformer.logic;
 
 import static pl.put.poznan.transformer.logic.TextTransformer.dictionary;
+import static pl.put.poznan.transformer.logic.TextTransformer.splitter;
 
 public class ReplaceShortcuts extends TextDecorator{
 
     private String replace(String text){
-        SplitToWords splitter = new SplitToWords();
 
         String result;
 
