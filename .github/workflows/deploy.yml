@@ -1,14 +1,15 @@
-name: Publish package to GitHub Packages
+name: Deploy to GitHub
 
 on:
   release:
     types: [created]
+  workflow_dispatch:
 
 jobs:
   publish:
     runs-on: ubuntu-latest 
     permissions: 
-      contents: read
+      contents: write
       packages: write 
     steps:
       - uses: actions/checkout@v2
@@ -21,11 +22,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Generate javadoc
-        run: mvn javadoc:javadoc
+        run: mvn --batch-mode javadoc:javadoc
       - name: Publish javadoc
         uses: crazy-max/ghaction-github-pages@v2.5.0
         with:
           target_branch: gh-pages
-          build_dir: target/site
+          build_dir: target/site/apidocs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

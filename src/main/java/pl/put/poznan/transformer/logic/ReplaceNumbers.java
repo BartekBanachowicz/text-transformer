@@ -4,22 +4,12 @@ import java.util.HashMap;
 
 import java.util.Objects;
 
-/**
- * Class description
- *
- * @author Kamil Ambroży
- * @version 1.0
- */
 public class ReplaceNumbers extends TextDecorator {
 
     private HashMap<String, String> numbers = new HashMap<String, String>();
 
     private SplitToWords splitClass;
 
-    /**
-     * Class constructor
-     * @param t jest to instancja Transformera
-     */
     public ReplaceNumbers(Transformer t) {
         super(t);
         load();
