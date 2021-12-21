@@ -17,7 +17,7 @@ package pl.put.poznan.transformer.logic;
  */
 public class TextTransformer {
     /**
-     * Valid transform names
+     * valid transform names
      */
     private final String[] transforms;
 
@@ -30,8 +30,11 @@ public class TextTransformer {
         this.transforms = transforms;
     }
 
+    public static final FindInDictionary dictionary = new FindInDictionary();
+    public static final SplitToWords splitter = new SplitToWords();
+
     /**
-     * Applies transforms defined in {@link TextTransformer#transforms} to a given <code>String</code>
+     * Applies transforms defined in {@link TextTransformer#transforms} attribute on a given <code>String</code>
      *
      * @param text text scheduled for transformation
      * @return transformed text
@@ -52,12 +55,16 @@ public class TextTransformer {
                     resultTransformer = new Capitalize(resultTransformer);
                     break;
                 case "Invert":
+                    resultTransformer = new Invert(resultTransformer);
                     break;
                 case "ReplaceNumbers":
+                    resultTransformer = new ReplaceNumbers(resultTransformer);
                     break;
                 case "ReplaceShortcuts":
+                    resultTransformer = new ReplaceShortcuts(resultTransformer);
                     break;
                 case "ReplaceFullWords":
+                    resultTransformer = new ReplaceFullWords(resultTransformer);
                     break;
             }
         }
