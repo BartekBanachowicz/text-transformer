@@ -1,7 +1,5 @@
 package pl.put.poznan.transformer.logic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SplitToWords {
@@ -16,5 +14,15 @@ public class SplitToWords {
 
         result  = list.toArray(new String[0]);
         return result;
+    }
+
+    public String mergeToText(String [] words){
+        StringBuilder result = new StringBuilder();
+        for(int i=0; i<words.length; i++){
+            result.append(words[i]);
+
+            if(i != words.length-1) {result.append(" ");}
+        }
+        return result.toString();
     }
 }

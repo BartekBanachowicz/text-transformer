@@ -8,6 +8,9 @@ public class TextTransformer {
         this.transforms = transforms;
     }
 
+    public static final FindInDictionary dictionary = new FindInDictionary();
+    public static final SplitToWords splitter = new SplitToWords();
+
     public String transform(String text){
 
         Transformer resultTransformer = new TextHolder(text);
