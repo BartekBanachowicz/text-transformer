@@ -1,5 +1,8 @@
 package pl.put.poznan.transformer.logic;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Locale;
 
 /**
@@ -7,6 +10,11 @@ import java.util.Locale;
  * This class makes it possible to convert the result of other text transformations to uppercase letters only.
  */
 public class ToUpper extends TextDecorator {
+
+    /**
+     * logging utility
+     */
+    private static final Logger log = LoggerFactory.getLogger(ToUpper.class);
 
     /**
      * @see TextDecorator#TextDecorator
@@ -18,6 +26,9 @@ public class ToUpper extends TextDecorator {
      */
     @Override
     public String getText() {
-        return super.getText().toUpperCase(Locale.ENGLISH);
+
+        String result = super.getText().toUpperCase(Locale.ENGLISH);
+        log.debug(" return: " + result);
+        return result;
     }
 }
