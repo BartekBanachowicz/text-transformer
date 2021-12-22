@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class InvertTest{
-    private String text="MOIm zDAniEm to NIE ma TaK, że doBRZe albo że nie DOBrze!";
+    private final String text="MOIm zDAniEm to NIE ma TaK, że doBRZe albo że nie DOBrze!";
 
     @Test
     void testInvert_findUpperLettersPositions_expectingSuccess(){
@@ -34,9 +34,9 @@ public class InvertTest{
         Transformer mock = mock(Transformer.class);
         Invert invert= new Invert(mock);
 
-        when(mock.GetText()).thenReturn(text);
+        when(mock.getText()).thenReturn(text);
 
-        String result = invert.GetText();
+        String result = invert.getText();
 
         assertEquals(result, "!EZrboD eiN eż oBLA ezrBoD eż ,kaT Am ein ot meinaDZ miom");
     }
@@ -46,9 +46,9 @@ public class InvertTest{
         Transformer mock = mock(Transformer.class);
         Invert invert= new Invert(mock);
 
-        when(mock.GetText()).thenReturn("MirEk");
+        when(mock.getText()).thenReturn("MirEk");
 
-        String result = invert.GetText();
+        String result = invert.getText();
 
         assertEquals(result, "KerIm");
     }

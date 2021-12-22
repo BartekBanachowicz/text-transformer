@@ -25,7 +25,7 @@ public class ReplaceNumbers extends TextDecorator {
                 if(Objects.equals(ns[ns.length - 1 - i], "1")) {
                     String search = ns[ns.length-1-i] + ns[ns.length-1-i+1];
                     isZero = false;
-                    result.append(numbersDirectory.getWord(search)).append(" ");
+                    result.append(numbersDirectory.getValue(search)).append(" ");
                     i--;
                 }
                 else {
@@ -37,7 +37,7 @@ public class ReplaceNumbers extends TextDecorator {
                     else {
                         String search = ns[ns.length-1-i] +"0".repeat(i);
                         isZero = false;
-                        result.append(numbersDirectory.getWord(search)).append(" ");
+                        result.append(numbersDirectory.getValue(search)).append(" ");
                     }
 
                 }
@@ -51,7 +51,7 @@ public class ReplaceNumbers extends TextDecorator {
                 else {
                     String search = ns[ns.length-1-i] +"0".repeat(i);
                     isZero = false;
-                    result.append(numbersDirectory.getWord(search));
+                    result.append(numbersDirectory.getValue(search));
                 }
 
 
@@ -65,7 +65,7 @@ public class ReplaceNumbers extends TextDecorator {
                 else {
                     String search = ns[ns.length-1-i] +"0".repeat(i);
                     isZero = false;
-                    result.append(numbersDirectory.getWord(search)).append(" ");
+                    result.append(numbersDirectory.getValue(search)).append(" ");
                 }
 
             }
@@ -75,8 +75,8 @@ public class ReplaceNumbers extends TextDecorator {
     }
 
     @Override
-    public String GetText() {
-        String[] tab = splitter.split(super.GetText());
+    public String getText() {
+        String[] tab = splitter.split(super.getText());
         StringBuilder newString = new StringBuilder();
 
 

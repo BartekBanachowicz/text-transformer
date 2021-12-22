@@ -19,7 +19,7 @@ public class ToLower extends TextDecorator {
      * Returns the result of the lowercase conversion.
      */
     @Override
-    public String GetText() {
-        return super.GetText().toLowerCase(Locale.ENGLISH);
+    public String getText() {
+        return super.getText().toLowerCase(Locale.ENGLISH);
     }
 }

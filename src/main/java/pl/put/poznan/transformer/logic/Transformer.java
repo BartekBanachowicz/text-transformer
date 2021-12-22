@@ -9,5 +9,5 @@ public interface Transformer {
     /**
      * Implementors should return a result of their operations with this method.
      */
-    String GetText();
+    String getText();
 }

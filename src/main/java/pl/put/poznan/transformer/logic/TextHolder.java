@@ -23,7 +23,7 @@ public class TextHolder implements Transformer {
     /**
      * Returns <code>String</code> stored in {@link TextHolder#InputText}.
      */
-    public String GetText() {
+    public String getText() {
         return this.InputText;
     }
 }
