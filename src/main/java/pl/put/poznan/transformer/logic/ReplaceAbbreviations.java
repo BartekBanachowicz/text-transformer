@@ -1,5 +1,8 @@
 package pl.put.poznan.transformer.logic;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import static pl.put.poznan.transformer.logic.TextTransformer.dictionary;
 
 public class ReplaceAbbreviations extends TextDecorator{
@@ -19,6 +22,8 @@ public class ReplaceAbbreviations extends TextDecorator{
         return result;
     }*/
 
+    private static final Logger log = LoggerFactory.getLogger(ReplaceAbbreviations.class);
+
     private String replace(String text){
 
         String [] keySet = dictionary.getListOfKeys();
@@ -36,6 +41,9 @@ public class ReplaceAbbreviations extends TextDecorator{
 
     @Override
     public String getText(){
-        return replace(super.getText());
+
+        String result = replace(super.getText());
+        log.debug(" return: " + result);
+        return result;
     }
 }

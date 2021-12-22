@@ -1,9 +1,14 @@
 package pl.put.poznan.transformer.logic;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import static java.lang.Character.isUpperCase;
 import static java.lang.Character.toUpperCase;
 
 public class Invert extends TextDecorator{
+
+    private static final Logger log = LoggerFactory.getLogger(Invert.class);
 
     public Boolean[] findUpperLetters(String text){
         Boolean[] upperLettersPositions = new Boolean[text.length()];
@@ -56,7 +61,9 @@ public class Invert extends TextDecorator{
 
     @Override
     public String getText() {
-        return reverse(super.getText());
+        String result = reverse(super.getText());
+        log.debug(" return: " + result);
+        return result;
     }
 
 }
