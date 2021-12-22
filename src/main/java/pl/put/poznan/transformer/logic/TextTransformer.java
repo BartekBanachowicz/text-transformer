@@ -11,7 +11,7 @@ package pl.put.poznan.transformer.logic;
  * <li>Capitalize
  * <li>Invert
  * <li>ReplaceNumbers
- * <li>ReplaceShortcuts
+ * <li>ReplaceAbbreviations
  * <li>ReplaceFullWords
  * </ul>
  */
@@ -72,8 +72,8 @@ public class TextTransformer {
                 case "ReplaceNumbers":
                     resultTransformer = new ReplaceNumbers(resultTransformer);
                     break;
-                case "ReplaceShortcuts":
-                    resultTransformer = new ReplaceShortcuts(resultTransformer);
+                case "ReplaceAbbreviations":
+                    resultTransformer = new ReplaceAbbreviations(resultTransformer);
                     break;
                 case "ReplaceFullWords":
                     resultTransformer = new ReplaceFullWords(resultTransformer);
@@ -81,6 +81,6 @@ public class TextTransformer {
             }
         }
 
-        return resultTransformer.GetText();
+        return resultTransformer.getText();
     }
 }

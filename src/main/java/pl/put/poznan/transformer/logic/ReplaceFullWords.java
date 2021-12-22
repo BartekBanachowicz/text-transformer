@@ -7,11 +7,11 @@ public class ReplaceFullWords extends TextDecorator {
 
     private String replace(String text){
 
-        String[] keySet = dictionary.getListOfWords();
+        String[] keySet = dictionary.getListOfValues();
 
         for(String word : keySet){
             if(text.contains(word)) {
-                text = text.replaceAll(word, dictionary.getShortcut(word));
+                text = text.replaceAll(word, dictionary.getKey(word));
             }
         }
 
@@ -21,7 +21,7 @@ public class ReplaceFullWords extends TextDecorator {
     public ReplaceFullWords(Transformer t) {super(t);}
 
     @Override
-    public String GetText(){
-        return replace(super.GetText());
+    public String getText(){
+        return replace(super.getText());
     }
 }
