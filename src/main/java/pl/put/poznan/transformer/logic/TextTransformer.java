@@ -22,6 +22,21 @@ public class TextTransformer {
     private final String[] transforms;
 
     /**
+     * abbreviation matching utility
+     */
+    public static final FindInDictionary dictionary = new FindInDictionary("src/main/resources/dictionary.csv");
+
+    /**
+     * number matching utility
+     */
+    public static final FindInDictionary numbersDirectory = new FindInDictionary("src/main/resources/numberDictionary.csv");
+
+    /**
+     * word splitting utility
+     */
+    public static final SplitToWords splitter = new SplitToWords();
+
+    /**
      * Initializes a new {@link TextTransformer} object.
      *
      * @param transforms valid transform names
@@ -29,10 +44,6 @@ public class TextTransformer {
     public TextTransformer(String[] transforms){
         this.transforms = transforms;
     }
-
-    public static final FindInDictionary dictionary = new FindInDictionary("src/main/resources/dictionary.csv");
-    public static final FindInDictionary numbersDirectory = new FindInDictionary("src/main/resources/numberDictionary.csv");
-    public static final SplitToWords splitter = new SplitToWords();
 
     /**
      * Applies transforms defined in {@link TextTransformer#transforms} attribute on a given <code>String</code>
