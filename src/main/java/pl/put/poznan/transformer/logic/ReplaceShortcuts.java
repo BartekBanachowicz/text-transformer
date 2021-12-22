@@ -5,7 +5,7 @@ import static pl.put.poznan.transformer.logic.TextTransformer.splitter;
 
 public class ReplaceShortcuts extends TextDecorator{
 
-    private String replace(String text){
+    /*private String replace(String text){
 
         String result;
 
@@ -18,6 +18,19 @@ public class ReplaceShortcuts extends TextDecorator{
         result = splitter.mergeToText(words);
 
         return result;
+    }*/
+
+    private String replace(String text){
+
+        String [] keySet = dictionary.getListOfShortcuts();
+
+        for(String shortcut : keySet){
+            if(text.contains(shortcut)) {
+                text = text.replaceAll(shortcut, dictionary.getWord(shortcut));
+            }
+        }
+
+        return text;
     }
 
     public ReplaceShortcuts(Transformer t) {super(t);}
