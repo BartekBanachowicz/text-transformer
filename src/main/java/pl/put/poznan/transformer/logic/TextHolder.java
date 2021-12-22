@@ -9,7 +9,7 @@ public class TextHolder implements Transformer {
     /**
      * stored <code>String</code>
      */
-    private final String InputText;
+    private final String inputText;
 
     /**
      * Wraps given <code>String</code> in a new {@link TextHolder} object.
@@ -17,13 +17,13 @@ public class TextHolder implements Transformer {
      * @param text stored <code>String</code>
      */
     public TextHolder(String text) {
-        this.InputText = text;
+        this.inputText = text;
     }
 
     /**
-     * Returns <code>String</code> stored in {@link TextHolder#InputText}.
+     * Returns <code>String</code> stored in {@link TextHolder#inputText}.
      */
     public String getText() {
-        return this.InputText;
+        return this.inputText;
     }
 }
