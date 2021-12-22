@@ -12,9 +12,8 @@ import java.nio.file.Paths;
 public class FindInDictionary {
     private final BiMap <String, String> dictionary = HashBiMap.create();
 
-    private void load(){
-        String fileName = "src/main/resources/dictionary.csv";
-        Path pathToFile = Paths.get(fileName);
+    private void load(String dirPath){
+        Path pathToFile = Paths.get(dirPath);
         String line;
         String[] elements;
 
@@ -31,6 +30,7 @@ public class FindInDictionary {
             ioException.printStackTrace();
         }
     }
+
 
     public String findWordAndReplace(String shortcut){
         String result = shortcut;
@@ -64,8 +64,8 @@ public class FindInDictionary {
         return dictionary.inverse().keySet().toArray(new String[0]);
     }
 
-    public FindInDictionary(){
-        this.load();
+    public FindInDictionary(String dirPath){
+        this.load(dirPath);
     }
 
 }

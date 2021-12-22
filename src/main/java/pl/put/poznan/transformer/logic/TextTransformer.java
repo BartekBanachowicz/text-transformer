@@ -30,7 +30,8 @@ public class TextTransformer {
         this.transforms = transforms;
     }
 
-    public static final FindInDictionary dictionary = new FindInDictionary();
+    public static final FindInDictionary dictionary = new FindInDictionary("src/main/resources/dictionary.csv");
+    public static final FindInDictionary numbersDirectory = new FindInDictionary("src/main/resources/numberDictionary.csv");
     public static final SplitToWords splitter = new SplitToWords();
 
     /**
