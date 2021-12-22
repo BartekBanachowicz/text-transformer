@@ -55,8 +55,8 @@ public class Invert extends TextDecorator{
     }
 
     @Override
-    public String GetText() {
-        return reverse(super.GetText());
+    public String getText() {
+        return reverse(super.getText());
     }
 
 }

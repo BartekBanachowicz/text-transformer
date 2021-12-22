@@ -1,18 +1,16 @@
 package pl.put.poznan.transformer.logic;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 class TextTransformerTest {
-    private TextTransformer transformer;
     private final String text = "MOIm zDAniEm to NIE ma TaK, że doBRZe albo że nie DOBrze!";
 
     @Test
     void testTransform_toUpperGiven_expectingSuccess() {
-        String[] transforms = {"ToUpper"};
-        transformer = new TextTransformer(transforms);
+        TextTransformer transformer = new TextTransformer(new String[]{"ToUpper"});
         String result = transformer.transform(text);
 
         assertEquals(result, "MOIM ZDANIEM TO NIE MA TAK, ŻE DOBRZE ALBO ŻE NIE DOBRZE!");
@@ -20,8 +18,7 @@ class TextTransformerTest {
 
     @Test
     void testTransform_toUpperGiven_expectingFailure() {
-        String[] transforms = {"ToUpper"};
-        transformer = new TextTransformer(transforms);
+        TextTransformer transformer = new TextTransformer(new String[]{"ToUpper"});
         String result = transformer.transform(text);
 
         assertNotSame(result, "moim zdaniem to nie tak, że dobrze albo że nie dobrze!");
@@ -29,8 +26,7 @@ class TextTransformerTest {
 
     @Test
     void testTransform_noTransformationGiven_ExpectingUneditedInput() {
-        String[] transforms = {""};
-        transformer = new TextTransformer(transforms);
+        TextTransformer transformer = new TextTransformer(new String[]{""});
         String result = transformer.transform(text);
 
         assertEquals(result, "MOIm zDAniEm to NIE ma TaK, że doBRZe albo że nie DOBrze!");
@@ -38,8 +34,7 @@ class TextTransformerTest {
 
     @Test
     void testTransform_invertGiven_ExpectingSuccess() {
-        String[] transforms = {"Invert"};
-        transformer = new TextTransformer(transforms);
+        TextTransformer transformer = new TextTransformer(new String[]{"Invert"});
         String result = transformer.transform(text);
 
         assertEquals(result, "!EZrboD eiN eż oBLA ezrBoD eż ,kaT Am ein ot meinaDZ miom");

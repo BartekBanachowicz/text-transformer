@@ -22,8 +22,8 @@ public class Capitalize extends TextDecorator {
      * Returns the result of the conversion.
      */
     @Override
-    public String GetText() {
-        String [] words = super.GetText().split("(?<=\\s)(?=\\S)");
+    public String getText() {
+        String [] words = super.getText().split("(?<=\\s)(?=\\S)");
         Pattern pattern = Pattern.compile("^.");
 
         return Arrays.stream(words).map((word) -> {

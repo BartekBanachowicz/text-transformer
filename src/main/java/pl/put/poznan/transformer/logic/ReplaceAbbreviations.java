@@ -1,9 +1,8 @@
 package pl.put.poznan.transformer.logic;
 
 import static pl.put.poznan.transformer.logic.TextTransformer.dictionary;
-import static pl.put.poznan.transformer.logic.TextTransformer.splitter;
 
-public class ReplaceShortcuts extends TextDecorator{
+public class ReplaceAbbreviations extends TextDecorator{
 
     /*private String replace(String text){
 
@@ -22,21 +21,21 @@ public class ReplaceShortcuts extends TextDecorator{
 
     private String replace(String text){
 
-        String [] keySet = dictionary.getListOfShortcuts();
+        String [] keySet = dictionary.getListOfKeys();
 
         for(String shortcut : keySet){
             if(text.contains(shortcut)) {
-                text = text.replaceAll(shortcut, dictionary.getWord(shortcut));
+                text = text.replaceAll(shortcut, dictionary.getValue(shortcut));
             }
         }
 
         return text;
     }
 
-    public ReplaceShortcuts(Transformer t) {super(t);}
+    public ReplaceAbbreviations(Transformer t) {super(t);}
 
     @Override
-    public String GetText(){
-        return replace(super.GetText());
+    public String getText(){
+        return replace(super.getText());
     }
 }

@@ -12,9 +12,8 @@ import java.nio.file.Paths;
 public class FindInDictionary {
     private final BiMap <String, String> dictionary = HashBiMap.create();
 
-    private void load(){
-        String fileName = "src/main/resources/dictionary.csv";
-        Path pathToFile = Paths.get(fileName);
+    private void load(String dirPath){
+        Path pathToFile = Paths.get(dirPath);
         String line;
         String[] elements;
 
@@ -32,40 +31,41 @@ public class FindInDictionary {
         }
     }
 
-    public String findWordAndReplace(String shortcut){
-        String result = shortcut;
-        if(dictionary.containsKey(shortcut)){
-            result = dictionary.get(shortcut);
+
+    public String findValueAndReplace(String key){
+        String result = key;
+        if(dictionary.containsKey(key)){
+            result = dictionary.get(key);
         }
         return result;
     }
 
-    public String findShortcutAndReplace(String word){
-        String result = word;
-        if(dictionary.inverse().containsKey(word)){
-            result = dictionary.inverse().get(word);
+    public String findKeyAndReplace(String value){
+        String result = value;
+        if(dictionary.inverse().containsKey(value)){
+            result = dictionary.inverse().get(value);
         }
         return result;
     }
 
-    public String getWord(String shortcut){
-        return dictionary.get(shortcut);
+    public String getValue(String key){
+        return dictionary.get(key);
     }
 
-    public String getShortcut(String word){
-        return dictionary.inverse().get(word);
+    public String getKey(String value){
+        return dictionary.inverse().get(value);
     }
 
-    public String[] getListOfShortcuts(){
+    public String[] getListOfKeys(){
         return dictionary.keySet().toArray(new String[0]);
     }
 
-    public String[] getListOfWords(){
+    public String[] getListOfValues(){
         return dictionary.inverse().keySet().toArray(new String[0]);
     }
 
-    public FindInDictionary(){
-        this.load();
+    public FindInDictionary(String dirPath){
+        this.load(dirPath);
     }
 
 }

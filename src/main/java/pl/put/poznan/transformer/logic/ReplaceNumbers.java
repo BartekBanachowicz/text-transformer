@@ -1,28 +1,23 @@
 package pl.put.poznan.transformer.logic;
-import java.util.HashMap;
-
 
 import java.util.Objects;
 
+import static pl.put.poznan.transformer.logic.TextTransformer.numbersDirectory;
+import static pl.put.poznan.transformer.logic.TextTransformer.splitter;
+
 public class ReplaceNumbers extends TextDecorator {
-
-    private HashMap<String, String> numbers = new HashMap<String, String>();
-
-    private SplitToWords splitClass;
 
     public ReplaceNumbers(Transformer t) {
         super(t);
-        load();
-        splitClass = new SplitToWords();
     }
 
     private boolean isNumber(String s) {
-        return s.matches("-?\\d+(\\,\\d+)?");
+        return s.matches("-?\\d+(,\\d+)?");
     }
 
     private String toStr(String s, boolean zero) {
         String[] ns = s.split("");
-        String result = "";
+        StringBuilder result = new StringBuilder();
         boolean isZero = true;
 
         for (int i = ns.length-1; i>=0; i--) {
@@ -30,19 +25,19 @@ public class ReplaceNumbers extends TextDecorator {
                 if(Objects.equals(ns[ns.length - 1 - i], "1")) {
                     String search = ns[ns.length-1-i] + ns[ns.length-1-i+1];
                     isZero = false;
-                    result += numbers.get(search) + " ";
+                    result.append(numbersDirectory.getValue(search)).append(" ");
                     i--;
                 }
                 else {
                     if (Objects.equals(ns[ns.length - 1 - i], "0")) {
                         if (zero && isZero) {
-                            result += "zero ";
+                            result.append("zero ");
                         }
                     }
                     else {
                         String search = ns[ns.length-1-i] +"0".repeat(i);
                         isZero = false;
-                        result += numbers.get(search) + " ";
+                        result.append(numbersDirectory.getValue(search)).append(" ");
                     }
 
                 }
@@ -50,13 +45,13 @@ public class ReplaceNumbers extends TextDecorator {
             else if (i==0) {
                 if (Objects.equals(ns[ns.length - 1 - i], "0")) {
                     if (isZero) {
-                        result += "zero";
+                        result.append("zero");
                     }
                 }
                 else {
                     String search = ns[ns.length-1-i] +"0".repeat(i);
                     isZero = false;
-                    result += numbers.get(search);
+                    result.append(numbersDirectory.getValue(search));
                 }
 
 
@@ -64,33 +59,33 @@ public class ReplaceNumbers extends TextDecorator {
             else {
                 if (Objects.equals(ns[ns.length - 1 - i], "0")) {
                     if (isZero && zero) {
-                        result += "zero ";
+                        result.append("zero ");
                     }
                 }
                 else {
                     String search = ns[ns.length-1-i] +"0".repeat(i);
                     isZero = false;
-                    result += numbers.get(search) + " ";
+                    result.append(numbersDirectory.getValue(search)).append(" ");
                 }
 
             }
         }
 
-        return result.trim();
+        return result.toString().trim();
     }
 
     @Override
-    public String GetText() {
-        String[] tab = splitClass.split(super.GetText());
-        String newString = "";
+    public String getText() {
+        String[] tab = splitter.split(super.getText());
+        StringBuilder newString = new StringBuilder();
 
 
         for (String s : tab) {
             if (isNumber(s)) {
                 String[] minusString = s.split("-");
-                String afMinString = null;
+                String afMinString;
                 if(minusString.length == 2) {
-                    newString += "minus ";
+                    newString.append("minus ");
                     afMinString = minusString[1];
                 }
                 else {
@@ -99,71 +94,30 @@ public class ReplaceNumbers extends TextDecorator {
 
                 String[] comma = afMinString.split(",");
 
-                newString += toStr(comma[0], false);
+                newString.append(toStr(comma[0], false));
                 if(comma.length == 2) {
-                    newString += " i ";
-                    newString += toStr(comma[1], true);
+                    newString.append(" i ");
+                    newString.append(toStr(comma[1], true));
                     if(comma[1].length() == 1) {
-                        newString += " dziesiątych";
+                        newString.append(" dziesiątych");
                     }
                     else if (comma[1].length() == 2) {
-                        newString += " setnych";
+                        newString.append(" setnych");
                     }
                     else {
-                        newString += " tysięcznych";
+                        newString.append(" tysięcznych");
                     }
                 }
-                newString += " ";
+                newString.append(" ");
 
             } else {
-                newString += s + " ";
+                newString.append(s).append(" ");
             }
         }
 
-        newString = newString.substring(0, newString.length() - 1);
+        newString = new StringBuilder(newString.substring(0, newString.length() - 1));
         //return newString.trim();
-        return newString;
+        return newString.toString();
     }
 
-    private void load() {
-        numbers.put("0", "zero");
-        numbers.put("1", "jeden");
-        numbers.put("2", "dwa");
-        numbers.put("3", "trzy");
-        numbers.put("4", "cztery");
-        numbers.put("5", "pięć");
-        numbers.put("6", "sześć");
-        numbers.put("7", "siedem");
-        numbers.put("8", "osiem");
-        numbers.put("9", "dziewięć");
-        numbers.put("10", "dziesięć");
-        numbers.put("11", "jedenaście");
-        numbers.put("12", "dwanaście");
-        numbers.put("13", "trzynaście");
-        numbers.put("14", "czternaście");
-        numbers.put("15", "piętnaście");
-        numbers.put("16", "szesnaście");
-        numbers.put("17", "siedemnaście");
-        numbers.put("18", "osiemnaście");
-        numbers.put("19", "dziewiętnaście");
-        numbers.put("20", "dwadzieścia");
-        numbers.put("30", "trzydzieści");
-        numbers.put("40", "czterdzieści");
-        numbers.put("50", "pięćdziesiąt");
-        numbers.put("60", "sześćdziesiąt");
-        numbers.put("70", "siedemdziesiąt");
-        numbers.put("80", "osiemdziesiąt");
-        numbers.put("90", "dziewięćdziesiąt");
-        numbers.put("100", "sto");
-        numbers.put("200", "dwieście");
-        numbers.put("300", "trzysta");
-        numbers.put("400", "czterysta");
-        numbers.put("500", "pięćset");
-        numbers.put("600", "sześćset");
-        numbers.put("700", "siedemset");
-        numbers.put("800", "osiemset");
-        numbers.put("900", "dziewięćset");
-        numbers.put("1000", "tysiąc");
-
-    }
 }

@@ -17,7 +17,7 @@ public class ToUpper extends TextDecorator {
      * Returns the result of the uppercase conversion.
      */
     @Override
-    public String GetText() {
-        return super.GetText().toUpperCase(Locale.ENGLISH);
+    public String getText() {
+        return super.getText().toUpperCase(Locale.ENGLISH);
     }
 }

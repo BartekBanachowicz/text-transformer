@@ -26,7 +26,7 @@ public abstract class TextDecorator implements Transformer {
      * This method should be overridden and then called using <code>super.GetText()</code>,
      * to apply additional <code>String</code> modifications.
      */
-    public String GetText() {
-        return transformer.GetText();
+    public String getText() {
+        return transformer.getText();
     }
 }
