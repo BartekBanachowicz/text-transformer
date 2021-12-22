@@ -1,5 +1,8 @@
 package pl.put.poznan.transformer.logic;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * TextTransformer allows to perform a set of text based transformations on a given String.
  * All transformations are guaranteed to work on english UTF-8 letters.
@@ -16,6 +19,12 @@ package pl.put.poznan.transformer.logic;
  * </ul>
  */
 public class TextTransformer {
+
+    /**
+     * logging utility
+     */
+    private static final Logger logger = LoggerFactory.getLogger(TextTransformer.class);
+    
     /**
      * valid transform names
      */
@@ -53,34 +62,52 @@ public class TextTransformer {
      */
     public String transform(String text){
 
+        logger.info("Constructing a transformer");
+
         Transformer resultTransformer = new TextHolder(text);
 
         for (String transformation : transforms) {
             switch (transformation) {
                 case "ToUpper":
+                    logger.info("Queued: " + transformation);
                     resultTransformer = new ToUpper(resultTransformer);
                     break;
+
                 case "ToLower":
+                    logger.info("Queued: " + transformation);
                     resultTransformer = new ToLower(resultTransformer);
                     break;
+
                 case "Capitalize":
+                    logger.info("Queued: " + transformation);
                     resultTransformer = new Capitalize(resultTransformer);
                     break;
+
                 case "Invert":
+                    logger.info("Queued: " + transformation);
                     resultTransformer = new Invert(resultTransformer);
                     break;
+
                 case "ReplaceNumbers":
+                    logger.info("Queued: " + transformation);
                     resultTransformer = new ReplaceNumbers(resultTransformer);
                     break;
+
                 case "ReplaceAbbreviations":
+                    logger.info("Queued: " + transformation);
                     resultTransformer = new ReplaceAbbreviations(resultTransformer);
                     break;
+
                 case "ReplaceFullWords":
+                    logger.info("Queued: " + transformation);
                     resultTransformer = new ReplaceFullWords(resultTransformer);
                     break;
             }
         }
 
-        return resultTransformer.getText();
+        logger.info("Starting the transformation");
+        String result = resultTransformer.getText();
+        logger.debug("return: " + result);
+        return result;
     }
 }

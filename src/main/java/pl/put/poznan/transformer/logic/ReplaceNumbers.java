@@ -1,5 +1,8 @@
 package pl.put.poznan.transformer.logic;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Objects;
 
 import static pl.put.poznan.transformer.logic.TextTransformer.numbersDirectory;
@@ -14,6 +17,8 @@ public class ReplaceNumbers extends TextDecorator {
     private boolean isNumber(String s) {
         return s.matches("-?\\d+(,\\d+)?");
     }
+
+    private static final Logger logger = LoggerFactory.getLogger(ReplaceNumbers.class);
 
     private String toStr(String s, boolean zero) {
         String[] ns = s.split("");
@@ -117,7 +122,10 @@ public class ReplaceNumbers extends TextDecorator {
 
         newString = new StringBuilder(newString.substring(0, newString.length() - 1));
         //return newString.trim();
-        return newString.toString();
+
+        String result = newString.toString();
+        logger.debug("return: " + result);
+        return result;
     }
 
 }
