@@ -14,7 +14,7 @@ public class ToUpper extends TextDecorator {
     /**
      * logging utility
      */
-    private static final Logger log = LoggerFactory.getLogger(ToUpper.class);
+    private static final Logger logger = LoggerFactory.getLogger(ToUpper.class);
 
     /**
      * @see TextDecorator#TextDecorator
@@ -28,7 +28,7 @@ public class ToUpper extends TextDecorator {
     public String getText() {
 
         String result = super.getText().toUpperCase(Locale.ENGLISH);
-        log.debug(" return: " + result);
+        logger.debug("return: " + result);
         return result;
     }
 }

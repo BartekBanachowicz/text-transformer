@@ -19,6 +19,12 @@ import org.slf4j.LoggerFactory;
  * </ul>
  */
 public class TextTransformer {
+
+    /**
+     * logging utility
+     */
+    private static final Logger logger = LoggerFactory.getLogger(TextTransformer.class);
+    
     /**
      * valid transform names
      */
@@ -56,54 +62,52 @@ public class TextTransformer {
      */
     public String transform(String text){
 
+        logger.info("Constructing a transformer");
+
         Transformer resultTransformer = new TextHolder(text);
 
         for (String transformation : transforms) {
             switch (transformation) {
                 case "ToUpper":
-                    Logger logUp = LoggerFactory.getLogger(ToUpper.class);
-                    logUp.info("Added : " + transformation);
+                    logger.info("Queued: " + transformation);
                     resultTransformer = new ToUpper(resultTransformer);
                     break;
 
                 case "ToLower":
-                    Logger logLo = LoggerFactory.getLogger(ToLower.class);
-                    logLo.info("Added : " + transformation);
+                    logger.info("Queued: " + transformation);
                     resultTransformer = new ToLower(resultTransformer);
                     break;
 
                 case "Capitalize":
-                    Logger logCa = LoggerFactory.getLogger(Capitalize.class);
-                    logCa.info("Added : " + transformation);
+                    logger.info("Queued: " + transformation);
                     resultTransformer = new Capitalize(resultTransformer);
                     break;
 
                 case "Invert":
-                    Logger logIn = LoggerFactory.getLogger(Invert.class);
-                    logIn.info("Added : " + transformation);
+                    logger.info("Queued: " + transformation);
                     resultTransformer = new Invert(resultTransformer);
                     break;
 
                 case "ReplaceNumbers":
-                    Logger logReN = LoggerFactory.getLogger(ReplaceNumbers.class);
-                    logReN.info("Added : " + transformation);
+                    logger.info("Queued: " + transformation);
                     resultTransformer = new ReplaceNumbers(resultTransformer);
                     break;
 
                 case "ReplaceAbbreviations":
-                    Logger logReA = LoggerFactory.getLogger(ReplaceAbbreviations.class);
-                    logReA.info("Added : " + transformation);
+                    logger.info("Queued: " + transformation);
                     resultTransformer = new ReplaceAbbreviations(resultTransformer);
                     break;
 
                 case "ReplaceFullWords":
-                    Logger logReF = LoggerFactory.getLogger(ReplaceFullWords.class);
-                    logReF.info("Added : " + transformation);
+                    logger.info("Queued: " + transformation);
                     resultTransformer = new ReplaceFullWords(resultTransformer);
                     break;
             }
         }
 
-        return resultTransformer.getText();
+        logger.info("Starting the transformation");
+        String result = resultTransformer.getText();
+        logger.debug("return: " + result);
+        return result;
     }
 }

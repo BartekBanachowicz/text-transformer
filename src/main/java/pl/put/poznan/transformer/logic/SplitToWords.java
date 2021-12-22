@@ -8,8 +8,6 @@ import java.util.List;
 
 public class SplitToWords {
 
-    private static final Logger log = LoggerFactory.getLogger(SplitToWords.class);
-
     public String[] split(String text){
 
         String[] result;
@@ -18,7 +16,6 @@ public class SplitToWords {
 
         result  = list.toArray(new String[0]);
 
-        log.debug(" return: " + Arrays.toString(result));
         return result;
     }
 

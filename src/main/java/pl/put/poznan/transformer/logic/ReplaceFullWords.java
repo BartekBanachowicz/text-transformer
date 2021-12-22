@@ -7,7 +7,7 @@ import static pl.put.poznan.transformer.logic.TextTransformer.dictionary;
 
 public class ReplaceFullWords extends TextDecorator {
 
-    private static final Logger log = LoggerFactory.getLogger(ReplaceFullWords.class);
+    private static final Logger logger = LoggerFactory.getLogger(ReplaceFullWords.class);
 
     private String replace(String text){
 
@@ -28,7 +28,7 @@ public class ReplaceFullWords extends TextDecorator {
     public String getText(){
 
         String result = replace(super.getText());
-        log.debug(" return: " + result);
+        logger.debug("return: " + result);
         return result;
     }
 }

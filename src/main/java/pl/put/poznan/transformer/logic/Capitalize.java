@@ -19,7 +19,7 @@ public class Capitalize extends TextDecorator {
     /**
      * logging utility
      */
-    private static final Logger log = LoggerFactory.getLogger(Capitalize.class);
+    private static final Logger logger = LoggerFactory.getLogger(Capitalize.class);
 
     /**
      * @see TextDecorator#TextDecorator
@@ -42,7 +42,7 @@ public class Capitalize extends TextDecorator {
             return word;
         }).collect(Collectors.joining());
 
-        log.debug(" return: " + result);
+        logger.debug("return: " + result);
         return result;
 
     }

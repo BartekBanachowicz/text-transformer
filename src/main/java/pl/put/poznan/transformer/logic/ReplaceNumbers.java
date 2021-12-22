@@ -18,7 +18,7 @@ public class ReplaceNumbers extends TextDecorator {
         return s.matches("-?\\d+(,\\d+)?");
     }
 
-    private static final Logger log = LoggerFactory.getLogger(ReplaceNumbers.class);
+    private static final Logger logger = LoggerFactory.getLogger(ReplaceNumbers.class);
 
     private String toStr(String s, boolean zero) {
         String[] ns = s.split("");
@@ -124,7 +124,7 @@ public class ReplaceNumbers extends TextDecorator {
         //return newString.trim();
 
         String result = newString.toString();
-        log.debug(" return: " + result);
+        logger.debug("return: " + result);
         return result;
     }
 

@@ -8,7 +8,7 @@ import static java.lang.Character.toUpperCase;
 
 public class Invert extends TextDecorator{
 
-    private static final Logger log = LoggerFactory.getLogger(Invert.class);
+    private static final Logger logger = LoggerFactory.getLogger(Invert.class);
 
     public Boolean[] findUpperLetters(String text){
         Boolean[] upperLettersPositions = new Boolean[text.length()];
@@ -62,7 +62,7 @@ public class Invert extends TextDecorator{
     @Override
     public String getText() {
         String result = reverse(super.getText());
-        log.debug(" return: " + result);
+        logger.debug("return: " + result);
         return result;
     }
 

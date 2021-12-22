@@ -14,7 +14,7 @@ public class ToLower extends TextDecorator {
     /**
      * logging utility
      */
-    private static final Logger log = LoggerFactory.getLogger(ToLower.class);
+    private static final Logger logger = LoggerFactory.getLogger(ToLower.class);
 
     /**
      * @see TextDecorator#TextDecorator
@@ -30,7 +30,7 @@ public class ToLower extends TextDecorator {
     public String getText() {
 
         String result = super.getText().toLowerCase(Locale.ENGLISH);
-        log.debug(" return: " + result);
+        logger.debug("return: " + result);
         return result;
     }
 }

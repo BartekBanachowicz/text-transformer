@@ -22,7 +22,7 @@ public class ReplaceAbbreviations extends TextDecorator{
         return result;
     }*/
 
-    private static final Logger log = LoggerFactory.getLogger(ReplaceAbbreviations.class);
+    private static final Logger logger = LoggerFactory.getLogger(ReplaceAbbreviations.class);
 
     private String replace(String text){
 
@@ -43,7 +43,7 @@ public class ReplaceAbbreviations extends TextDecorator{
     public String getText(){
 
         String result = replace(super.getText());
-        log.debug(" return: " + result);
+        logger.debug("return: " + result);
         return result;
     }
 }
