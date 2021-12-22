@@ -10,8 +10,6 @@ public class SplitToWords {
 
         List<String> list = List.of(text.split(" "));
 
-        //TODO - Detection and handling of punctuation marks
-
         result  = list.toArray(new String[0]);
         return result;
     }
