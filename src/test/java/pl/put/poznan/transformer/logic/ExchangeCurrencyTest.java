@@ -8,7 +8,8 @@ import java.net.URISyntaxException;
 public class ExchangeCurrencyTest {
 
     @Test
-    void testCurrencyHolder_Connection_expectingSuccess() throws URISyntaxException, IOException, InterruptedException {
+    void testCurrencyHolder_Connection_expectingSuccess() throws URISyntaxException, IOException {
         CurrencyHolder holder = new CurrencyHolder();
+        System.out.println(holder.getCurrenciesCodes().toString());
     }
 }
