@@ -1,6 +1,8 @@
 package pl.put.poznan.transformer.logic;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.InOrder;
+import org.mockito.Mockito;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -14,20 +16,47 @@ public class ExchangeCurrencyTest {
     @Test
     void testCurrencyHolder_Connection_expectingSuccess() throws URISyntaxException, IOException {
         CurrencyHolder holder = new CurrencyHolder();
-        System.out.println(holder.getCurrencyCodes().toString());
     }
 
     @Test
-    void testExchangeCurrency(){
-        Transformer mock = mock(Transformer.class);
-        ExchangeCurrency exchanger = new ExchangeCurrency(mock, "PLN");
-        String result, text;
+    void testExchangeCalculatorEURtoPLN_expectingSuccess(){
+        CurrencyHolder holder = mock(CurrencyHolder.class);
+        when(holder.getBid("EUR")).thenReturn(4.00F);
 
-        text = "Mam 20 USD i 30 EUR.";
-        when(mock.getText()).thenReturn(text);
+        Float result = ExchangeCalculator.calculate(holder,"EUR", "PLN", 20.00F);
+        assertEquals(result,80.00F);
+    }
 
-        result = exchanger.getText();
-        assertEquals(result, "Mam X PLN i X PLN");
+    @Test
+    void testExchangeCalculatorPLNtoEUR_expectingSuccess(){
+        CurrencyHolder holder = mock(CurrencyHolder.class);
+        when(holder.getAsk("EUR")).thenReturn(4.00F);
+
+        Float result = ExchangeCalculator.calculate(holder,"PLN", "EUR", 80.00F);
+        assertEquals(result,20.00F);
+    }
+
+    @Test
+    void testExchangeCalculatorUSDtoEUR_expectingSuccess(){
+        CurrencyHolder holder = mock(CurrencyHolder.class);
+        when(holder.getBid("USD")).thenReturn(3.50F);
+        when(holder.getAsk("EUR")).thenReturn(4.00F);
+
+        Float result = ExchangeCalculator.calculate(holder,"USD", "EUR", 35.00F);
+        assertEquals(result,30.63F);
+    }
+
+    @Test
+    void testExchangeCalculatorUSDtoEURorder_expectingSuccess(){
+        CurrencyHolder holder = mock(CurrencyHolder.class);
+        when(holder.getBid("USD")).thenReturn(3.50F);
+        when(holder.getAsk("EUR")).thenReturn(4.00F);
+
+        Float result = ExchangeCalculator.calculate(holder,"USD", "EUR", 35.00F);
+
+        InOrder inOrder = Mockito.inOrder(holder);
+        inOrder.verify(holder).getBid("USD");
+        inOrder.verify(holder).getAsk("EUR");
     }
 
 }

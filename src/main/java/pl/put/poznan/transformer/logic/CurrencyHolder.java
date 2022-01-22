@@ -18,6 +18,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
+/**
+ * Utility to store data about currencies. Allows refreshing data with NBP API.
+ * Provides additional methods to convert common currency symbols and batch of methods to perform actions on data set.
+ */
 public class CurrencyHolder {
 
     /**
@@ -41,10 +46,13 @@ public class CurrencyHolder {
      */
     private String tradingDate;
 
+    /**
+     * currency common symbols like $, €, zł
+     */
     private final HashMap<String, String> currencySymbols;
 
     /**
-     * Read data from JSON file delivered with NBP API. Return list of Currency objects with information about currency codes,
+     * Reads data from JSON file delivered with NBP API. Return list of Currency objects with information about currency codes,
      * names, ask rates and bid rates. Update tradingDate field.
      */
     private List<Currency> readCurrencyFromJSON() throws IOException {
@@ -60,7 +68,7 @@ public class CurrencyHolder {
     }
 
     /**
-     * Use GET request to get data from NBP API. Use readCurrencyFromJSON() method to take data for exchangeRates List.
+     * Uses GET request to get data from NBP API. Use readCurrencyFromJSON() method to take data for exchangeRates List.
      */
     CurrencyHolder() throws URISyntaxException, IOException {
 
@@ -79,18 +87,39 @@ public class CurrencyHolder {
         exchangeRates  = readCurrencyFromJSON();
         logger.debug("Prepared currency exchange rates for: " + this.tradingDate);
 
-        currencySymbols = new HashMap<String, String>(){{
-           put("€","EUR"); put("$","USD"); put("zł","PLN");
-           put("USD", "USD"); put("EUR", "EUR"); put("PLN", "PLN");
-           put("AUD","AUD"); put("CAD", "CAD"); put("HUF", "HUF");
-           put("CHF", "CHF"); put("GBP", "GBP"); put("JPY", "JPY");
-           put("CZK", "CZK"); put("DKK", "DKK"); put("NOK", "NOK");
-           put("SEK", "SEK"); put("HRK", "HRK"); put("RON", "RON");
-           put("BGN", "BGN"); put("TRY", "TRY"); put("ILS", "ILS");
-           put("CLP", "CLP"); put("PHP", "PHP"); put("MXN", "MXN");
-           put("ZAR", "ZAR"); put("BRL", "BRL"); put("MYR", "MYR");
-           put("RUB", "RUB"); put("IDR", "IDR"); put("INR", "INR");
-           put("KRW", "KRW"); put("CNY", "CNY");
+        currencySymbols = new HashMap<>() {{
+            put("€", "EUR");
+            put("$", "USD");
+            put("zł", "PLN");
+            put("USD", "USD");
+            put("EUR", "EUR");
+            put("PLN", "PLN");
+            put("AUD", "AUD");
+            put("CAD", "CAD");
+            put("HUF", "HUF");
+            put("CHF", "CHF");
+            put("GBP", "GBP");
+            put("JPY", "JPY");
+            put("CZK", "CZK");
+            put("DKK", "DKK");
+            put("NOK", "NOK");
+            put("SEK", "SEK");
+            put("HRK", "HRK");
+            put("RON", "RON");
+            put("BGN", "BGN");
+            put("TRY", "TRY");
+            put("ILS", "ILS");
+            put("CLP", "CLP");
+            put("PHP", "PHP");
+            put("MXN", "MXN");
+            put("ZAR", "ZAR");
+            put("BRL", "BRL");
+            put("MYR", "MYR");
+            put("RUB", "RUB");
+            put("IDR", "IDR");
+            put("INR", "INR");
+            put("KRW", "KRW");
+            put("CNY", "CNY");
 
         }};
 
@@ -108,7 +137,7 @@ public class CurrencyHolder {
     }
 
     /**
-     * Return bid rate for currency with provided code name. Return null if there is no such currency.
+     * Returns bid rate for currency with provided code name. Return null if there is no such currency.
      */
     public Float getBid(String code){
         for (Currency exchangeRate : exchangeRates) {
@@ -120,7 +149,7 @@ public class CurrencyHolder {
     }
 
     /**
-     * Return ask rate for currency with provided code name. Return null if there is no such currency.
+     * Returns ask rate for currency with provided code name. Return null if there is no such currency.
      */
     public Float getAsk(String code){
         for (Currency exchangeRate : exchangeRates) {
@@ -131,11 +160,17 @@ public class CurrencyHolder {
         return null;
     }
 
+    /**
+     * Returns array of symbols of stored currencies.
+     */
     public String[] getListOfSymbols(){
         return this.currencySymbols.keySet().toArray(new String[0]);
     }
 
-    public String getCodeFoSymbol(String symbol){
+    /**
+     * Returns international currency code for provided symbol.
+     */
+    public String getCodeForSymbol(String symbol){
         return this.currencySymbols.get(symbol);
     }
 
