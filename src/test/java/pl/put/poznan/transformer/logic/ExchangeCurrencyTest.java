@@ -20,7 +20,7 @@ public class ExchangeCurrencyTest {
     @Test
     void testExchangeCurrency(){
         Transformer mock = mock(Transformer.class);
-        ExchangeCurrency exchanger = new ExchangeCurrency(mock);
+        ExchangeCurrency exchanger = new ExchangeCurrency(mock, "PLN");
         String result, text;
 
         text = "Mam 20 USD i 30 EUR.";

@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 /**
  * TextTransformer allows to perform a set of text based transformations on a given String.
@@ -31,7 +32,7 @@ public class TextTransformer {
     /**
      * valid transform names
      */
-    private final String[] transforms;
+    private final List<List<String>> transforms;
 
     /**
      * abbreviation matching utility
@@ -66,7 +67,7 @@ public class TextTransformer {
      *
      * @param transforms valid transform names
      */
-    public TextTransformer(String[] transforms){
+    public TextTransformer(List<List<String>> transforms){
         this.transforms = transforms;
     }
 
@@ -82,41 +83,46 @@ public class TextTransformer {
 
         Transformer resultTransformer = new TextHolder(text);
 
-        for (String transformation : transforms) {
-            switch (transformation) {
+        for (List<String> transform : transforms) {
+            switch (transform.get(0)) {
                 case "ToUpper":
-                    logger.info("Queued: " + transformation);
+                    logger.info("Queued: " + transform.get(0));
                     resultTransformer = new ToUpper(resultTransformer);
                     break;
 
                 case "ToLower":
-                    logger.info("Queued: " + transformation);
+                    logger.info("Queued: " + transform.get(0));
                     resultTransformer = new ToLower(resultTransformer);
                     break;
 
                 case "Capitalize":
-                    logger.info("Queued: " + transformation);
+                    logger.info("Queued: " + transform.get(0));
                     resultTransformer = new Capitalize(resultTransformer);
                     break;
 
                 case "Invert":
-                    logger.info("Queued: " + transformation);
+                    logger.info("Queued: " + transform.get(0));
                     resultTransformer = new Invert(resultTransformer);
                     break;
 
                 case "ReplaceNumbers":
-                    logger.info("Queued: " + transformation);
+                    logger.info("Queued: " + transform.get(0));
                     resultTransformer = new ReplaceNumbers(resultTransformer);
                     break;
 
                 case "ReplaceAbbreviations":
-                    logger.info("Queued: " + transformation);
+                    logger.info("Queued: " + transform.get(0));
                     resultTransformer = new ReplaceAbbreviations(resultTransformer);
                     break;
 
                 case "ReplaceFullWords":
-                    logger.info("Queued: " + transformation);
+                    logger.info("Queued: " + transform.get(0));
                     resultTransformer = new ReplaceFullWords(resultTransformer);
+                    break;
+
+                case "Exchange":
+                    logger.info("Queued: " + transform.get(0));
+                    resultTransformer = new ExchangeCurrency(resultTransformer, transform.get(1));
                     break;
             }
         }

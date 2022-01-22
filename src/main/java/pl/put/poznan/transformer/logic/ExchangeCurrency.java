@@ -12,8 +12,11 @@ import static pl.put.poznan.transformer.logic.TextTransformer.*;
 public class ExchangeCurrency extends TextDecorator{
 
     private static final Logger logger = LoggerFactory.getLogger(pl.put.poznan.transformer.logic.ExchangeCurrency.class);
-
-    public ExchangeCurrency(Transformer t) {super(t);}
+    private String targetCurrency;
+    public ExchangeCurrency(Transformer t, String trgCurrency) {
+        super(t);
+        targetCurrency = trgCurrency;
+    }
 
     private String exchange(String text){
         String[] words = splitter.split(text);
@@ -21,14 +24,18 @@ public class ExchangeCurrency extends TextDecorator{
 
         for(int i=0; i<words.length-1; i++){
             if(words[i].matches("[0-9]*[\\.|\\,]?[0-9]+")){
-                if(words[i+1].matches("[a-zA-Z]+\\p{Punct}") && symbols.contains(words[i+1].replaceAll("\\p{Punct}", ""))) {
+                if(words[i+1].matches("[a-zA-Z]+\\p{Punct}") && symbols.contains(words[i+1].replaceAll("\\p{Punct}", "").toUpperCase())) {
                     char punct = words[i+1].charAt(words[i+1].length()-1);
-                    words[i] = String.valueOf(ExchangeCalculator.calculate(currencyHolder, currencyHolder.getCodeFoSymbol(words[i+1].replaceAll("\\p{Punct}", "")), "PLN", Float.valueOf(words[i])));
-                    words[i+1] = "PLN"+punct;
+                    words[i] = String.valueOf(ExchangeCalculator.calculate(currencyHolder,
+                            currencyHolder.getCodeFoSymbol(words[i+1].replaceAll("\\p{Punct}", "").toUpperCase()),
+                            targetCurrency, Float.valueOf(words[i])));
+
+                    words[i+1] = targetCurrency+punct;
                 }
-                else if(symbols.contains(words[i+1])){
-                    words[i] = String.valueOf(ExchangeCalculator.calculate(currencyHolder, currencyHolder.getCodeFoSymbol(words[i+1]), "PLN", Float.valueOf(words[i])));
-                    words[i+1] = "PLN";
+                else if(symbols.contains(words[i+1].toUpperCase())){
+                    words[i] = String.valueOf(ExchangeCalculator.calculate(currencyHolder,
+                            currencyHolder.getCodeFoSymbol(words[i+1].toUpperCase()), targetCurrency, Float.valueOf(words[i])));
+                    words[i+1] = targetCurrency;
                 }
             }
         }
