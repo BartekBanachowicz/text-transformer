@@ -3,6 +3,9 @@ package pl.put.poznan.transformer.logic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 /**
  * TextTransformer allows to perform a set of text based transformations on a given String.
  * All transformations are guaranteed to work on english UTF-8 letters.
@@ -44,6 +47,19 @@ public class TextTransformer {
      * word splitting utility
      */
     public static final SplitToWords splitter = new SplitToWords();
+
+    /**
+     * currency exchanging utility
+     */
+    public static CurrencyHolder currencyHolder = null;
+
+    static {
+        try {
+            currencyHolder = new CurrencyHolder();
+        } catch (URISyntaxException | IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Initializes a new {@link TextTransformer} object.

@@ -15,6 +15,7 @@ import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class CurrencyHolder {
@@ -39,6 +40,8 @@ public class CurrencyHolder {
      * trading date for rates in exchangeRates
      */
     private String tradingDate;
+
+    private final HashMap<String, String> currencySymbols;
 
     /**
      * Read data from JSON file delivered with NBP API. Return list of Currency objects with information about currency codes,
@@ -75,6 +78,22 @@ public class CurrencyHolder {
         logger.debug("Connected to NBP API");
         exchangeRates  = readCurrencyFromJSON();
         logger.debug("Prepared currency exchange rates for: " + this.tradingDate);
+
+        currencySymbols = new HashMap<String, String>(){{
+           put("€","EUR"); put("$","USD"); put("zł","PLN");
+           put("USD", "USD"); put("EUR", "EUR"); put("PLN", "PLN");
+           put("AUD","AUD"); put("CAD", "CAD"); put("HUF", "HUF");
+           put("CHF", "CHF"); put("GBP", "GBP"); put("JPY", "JPY");
+           put("CZK", "CZK"); put("DKK", "DKK"); put("NOK", "NOK");
+           put("SEK", "SEK"); put("HRK", "HRK"); put("RON", "RON");
+           put("BGN", "BGN"); put("TRY", "TRY"); put("ILS", "ILS");
+           put("CLP", "CLP"); put("PHP", "PHP"); put("MXN", "MXN");
+           put("ZAR", "ZAR"); put("BRL", "BRL"); put("MYR", "MYR");
+           put("RUB", "RUB"); put("IDR", "IDR"); put("INR", "INR");
+           put("KRW", "KRW"); put("CNY", "CNY");
+
+        }};
+
     }
 
     /**
@@ -111,4 +130,13 @@ public class CurrencyHolder {
         }
         return null;
     }
+
+    public String[] getListOfSymbols(){
+        return this.currencySymbols.keySet().toArray(new String[0]);
+    }
+
+    public String getCodeFoSymbol(String symbol){
+        return this.currencySymbols.get(symbol);
+    }
+
 }
