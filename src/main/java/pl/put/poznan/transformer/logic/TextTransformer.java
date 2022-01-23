@@ -102,6 +102,10 @@ public class TextTransformer {
                     logger.info("Queued: " + transformation);
                     resultTransformer = new ReplaceFullWords(resultTransformer);
                     break;
+                case "DeleteDuplicates":
+                    logger.info("Queued: " + transformation);
+                    resultTransformer = new DeleteDuplicates(resultTransformer);
+                    break;
             }
         }
 
