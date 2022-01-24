@@ -1,10 +1,13 @@
 package pl.put.poznan.transformer.logic;
 
+import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -72,6 +75,19 @@ public class TextTransformer {
     }
 
     /**
+     * Initializes a new {@link TextTransformer} object.
+     *
+     * @param transforms valid transform names
+     */
+    public TextTransformer(String[] transforms){
+        List<List<String>> result = new ArrayList<>();
+        for (String transform : transforms) {
+            result.add(List.of(transform));
+        }
+        this.transforms = result;
+    }
+
+    /**
      * Applies transforms defined in {@link TextTransformer#transforms} attribute on a given <code>String</code>
      *
      * @param text text scheduled for transformation
@@ -122,7 +138,12 @@ public class TextTransformer {
 
                 case "Exchange":
                     logger.info("Queued: " + transform.get(0));
-                    resultTransformer = new ExchangeCurrency(resultTransformer, transform.get(1));
+                    if(transform.size()>1){
+                        resultTransformer = new ExchangeCurrency(resultTransformer, transform.get(1));
+                    } else {
+                        resultTransformer = new ExchangeCurrency(resultTransformer, "PLN");
+                    }
+
                     break;
             }
         }

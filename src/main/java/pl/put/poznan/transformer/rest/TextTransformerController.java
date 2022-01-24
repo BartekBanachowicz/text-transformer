@@ -16,13 +16,13 @@ public class TextTransformerController {
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public String get(@PathVariable String text,
-                              @RequestParam(value="transforms", defaultValue="") List<List<String>> transforms) {
+                      @RequestParam(value="transforms", defaultValue="") String[] transforms) {
 
         logger.info("Received a request");
 
         // log the parameters
         logger.debug("text: " + text);
-        logger.debug("transforms: " + transforms.toString());
+        logger.debug("transforms: " + Arrays.toString(transforms));
 
         // perform the transformation, you should run your logic here, below is just a silly example
         TextTransformer transformer = new TextTransformer(transforms);
