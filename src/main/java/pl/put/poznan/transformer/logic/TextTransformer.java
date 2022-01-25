@@ -136,6 +136,10 @@ public class TextTransformer {
                     resultTransformer = new ReplaceFullWords(resultTransformer);
                     break;
 
+                case "DeleteDuplicates":
+                    logger.info("Queued: " + transform.get(0));
+                    resultTransformer = new DeleteDuplicates(resultTransformer);
+
                 case "Exchange":
                     logger.info("Queued: " + transform.get(0));
                     if(transform.size()>1){
