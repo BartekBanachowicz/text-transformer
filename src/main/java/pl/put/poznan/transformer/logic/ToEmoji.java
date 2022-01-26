@@ -6,14 +6,28 @@ import org.slf4j.LoggerFactory;
 import static pl.put.poznan.transformer.logic.TextTransformer.emojiDirectory;
 import static pl.put.poznan.transformer.logic.TextTransformer.splitter;
 
+/**
+ * Part of the decorator pattern.
+ * This class makes it possible to convert the result of other text transformations
+ * by changing emoji names to emoji codes.
+ */
 public class ToEmoji extends TextDecorator{
 
+    /**
+     * @see TextDecorator#TextDecorator
+     */
     public ToEmoji(Transformer t) {
         super(t);
     }
 
+    /**
+     * logging utility
+     */
     private static final Logger logger = LoggerFactory.getLogger(ReplaceNumbers.class);
 
+    /**
+     * Returns the result of the conversion.
+     */
     @Override
     public String getText() {
         String[] tab = splitter.split(super.getText());
