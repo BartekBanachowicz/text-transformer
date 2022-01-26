@@ -23,6 +23,10 @@ import java.util.List;
  * <li>ReplaceNumbers
  * <li>ReplaceAbbreviations
  * <li>ReplaceFullWords
+ * <li>Exchange
+ * <li>DeleteDuplicates
+ * <li>ToLatex
+ * <li>ToEmoji
  * </ul>
  */
 public class TextTransformer {
