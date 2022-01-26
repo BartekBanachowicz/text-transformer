@@ -1,5 +1,8 @@
 package pl.put.poznan.transformer.logic;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Locale;
 
 /**
@@ -7,6 +10,11 @@ import java.util.Locale;
  * This class makes it possible to convert the result of other text transformations to lowercase letters only.
  */
 public class ToLower extends TextDecorator {
+
+    /**
+     * logging utility
+     */
+    private static final Logger logger = LoggerFactory.getLogger(ToLower.class);
 
     /**
      * @see TextDecorator#TextDecorator
@@ -20,6 +28,9 @@ public class ToLower extends TextDecorator {
      */
     @Override
     public String getText() {
-        return super.getText().toLowerCase(Locale.ENGLISH);
+
+        String result = super.getText().toLowerCase(Locale.ENGLISH);
+        logger.debug("return: " + result);
+        return result;
     }
 }

@@ -1,9 +1,13 @@
 package pl.put.poznan.transformer.logic;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import static pl.put.poznan.transformer.logic.TextTransformer.dictionary;
 
 public class ReplaceFullWords extends TextDecorator {
 
+    private static final Logger logger = LoggerFactory.getLogger(ReplaceFullWords.class);
 
     private String replace(String text){
 
@@ -22,6 +26,9 @@ public class ReplaceFullWords extends TextDecorator {
 
     @Override
     public String getText(){
-        return replace(super.getText());
+
+        String result = replace(super.getText());
+        logger.debug("return: " + result);
+        return result;
     }
 }
