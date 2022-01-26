@@ -1,6 +1,7 @@
 package pl.put.poznan.transformer.storage;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class TransformsManager {
      * @param minutes the expiration period, in number of minutes, used in the resource creation
      * @return the resource id, that can be later used to reference the stored object
      */
-    public static int saveTransforms(List<List<String>> transforms, int minutes) {
+    public static synchronized int saveTransforms(List<List<String>> transforms, int minutes) {
         int key = transforms.hashCode();
         TransformsManager.transformsStorage.compute(
                 key,
@@ -37,7 +38,7 @@ public class TransformsManager {
      * @param id the resource's id
      * @return the transforms list, or {null} if the resource doesn't exist
      */
-    public static List<List<String>> getTransforms(int id) {
+    public static synchronized List<List<String>> getTransforms(int id) {
         TransformsResource transformsResource = TransformsManager.transformsStorage.get(id);
         return transformsResource == null ? null : transformsResource.unpack();
     }
@@ -45,9 +46,9 @@ public class TransformsManager {
     /**
      * Deletes stale resources.
      */
-    public static void clear() {
+    public static synchronized void clear() {
         LocalDateTime localDateTime = LocalDateTime.now();
-        for (Integer key : TransformsManager.transformsStorage.keySet()) {
+        for (Integer key : new HashSet<>(TransformsManager.transformsStorage.keySet())) {
             TransformsManager.transformsStorage.computeIfPresent(
                     key,
                     (k, v) -> v.hasExpired(localDateTime) ? null : v
