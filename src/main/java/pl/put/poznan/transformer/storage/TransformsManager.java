@@ -1,5 +1,9 @@
 package pl.put.poznan.transformer.storage;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import pl.put.poznan.transformer.logic.TextTransformer;
+
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -11,6 +15,12 @@ import java.util.List;
  * and preserves the stored values until termination.
  */
 public class TransformsManager {
+
+    /**
+     * logging utility
+     */
+    private static final Logger logger = LoggerFactory.getLogger(TransformsManager.class);
+
     /**
      * the actual container, used to store {@link TransformsResource} objects
      */
@@ -25,28 +35,45 @@ public class TransformsManager {
      */
     public static synchronized int saveTransforms(List<List<String>> transforms, int minutes) {
         int key = transforms.hashCode();
+
+        TransformsManager.logger.info("Saving transforms");
+
         TransformsManager.transformsStorage.compute(
                 key,
                 (k, v) -> (v == null) ? new TransformsResource(transforms, minutes) : v.refresh(minutes)
         );
+
+        TransformsManager.logger.debug("return: " + key);
         return key;
     }
 
     /**
      * Returns the transforms list identified by the given id.
      *
-     * @param id the resource's id
+     * @param key the resource's id
      * @return the transforms list, or {null} if the resource doesn't exist
      */
-    public static synchronized List<List<String>> getTransforms(int id) {
-        TransformsResource transformsResource = TransformsManager.transformsStorage.get(id);
-        return transformsResource == null ? null : transformsResource.unpack();
+    public static synchronized List<List<String>> getTransforms(int key) {
+        TransformsManager.logger.info("Accessing transforms");
+
+        TransformsResource transformsResource = TransformsManager.transformsStorage.get(key);
+
+        if (transformsResource == null) {
+            TransformsManager.logger.debug("return: null");
+            return null;
+        }
+        else {
+            TransformsManager.logger.debug("return: " +  transformsResource.unpack());
+            return transformsResource.unpack();
+        }
     }
 
     /**
      * Deletes stale resources.
      */
     public static synchronized void clear() {
+        TransformsManager.logger.info("Clearing stale transforms");
+
         LocalDateTime localDateTime = LocalDateTime.now();
         for (Integer key : new HashSet<>(TransformsManager.transformsStorage.keySet())) {
             TransformsManager.transformsStorage.computeIfPresent(
