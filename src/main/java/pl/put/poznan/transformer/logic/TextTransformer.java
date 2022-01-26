@@ -1,13 +1,11 @@
 package pl.put.poznan.transformer.logic;
 
-import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -131,6 +129,7 @@ public class TextTransformer {
                     resultTransformer = new ReplaceAbbreviations(resultTransformer);
                     break;
 
+
                 case "ReplaceFullWords":
                     logger.info("Queued: " + transform.get(0));
                     resultTransformer = new ReplaceFullWords(resultTransformer);
@@ -149,6 +148,12 @@ public class TextTransformer {
                     }
 
                     break;
+
+                case "ToLatex":
+                    logger.info("Queued: " + transform.get(0));
+                    resultTransformer = new ToLatex(resultTransformer);
+                    break;
+
             }
         }
 

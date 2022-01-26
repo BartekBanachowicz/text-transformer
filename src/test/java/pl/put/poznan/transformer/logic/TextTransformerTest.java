@@ -2,7 +2,6 @@ package pl.put.poznan.transformer.logic;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -65,5 +64,13 @@ class TextTransformerTest {
         TextTransformer transformer = new TextTransformer(List.of(List.of("ReplaceNumbers")));
         String result = transformer.transform(test);
         assertEquals("Po minus pięć i dwieście pięćdziesiąt tysięcznych zł",result);
+    }
+
+    @Test
+    void testTransform_toLatex() {
+        String test = "Minus &  Co";
+        TextTransformer transformer = new TextTransformer(List.of(List.of("ToLatex")));
+        String result = transformer.transform(test);
+        assertEquals("Minus \\&  Co",result);
     }
 }
