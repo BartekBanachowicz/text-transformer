@@ -46,6 +46,11 @@ public class TextTransformer {
     public static final FindInDictionary numbersDirectory = new FindInDictionary("src/main/resources/numberDictionary.csv");
 
     /**
+     * emoji matching utility
+     */
+    public static final FindInDictionary emojiDirectory = new FindInDictionary("src/main/resources/emojiDictionary.csv");
+
+    /**
      * word splitting utility
      */
     public static final SplitToWords splitter = new SplitToWords();
@@ -152,6 +157,11 @@ public class TextTransformer {
                 case "ToLatex":
                     logger.info("Queued: " + transform.get(0));
                     resultTransformer = new ToLatex(resultTransformer);
+                    break;
+
+                case "ToEmoji":
+                    logger.info("Queued: " + transform.get(0));
+                    resultTransformer = new ToEmoji(resultTransformer);
                     break;
 
             }

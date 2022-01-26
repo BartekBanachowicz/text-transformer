@@ -73,4 +73,12 @@ class TextTransformerTest {
         String result = transformer.transform(test);
         assertEquals("Minus \\&  Co",result);
     }
+
+    @Test
+    void testTransform_toEmoji() {
+        String test = "This is me UpsidE-dOwn!";
+        TextTransformer transformer = new TextTransformer(List.of(List.of("ToEmoji")));
+        String result = transformer.transform(test);
+        assertEquals("This is me &#x1F643!",result);
+    }
 }

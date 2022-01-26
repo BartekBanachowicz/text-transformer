@@ -48,6 +48,10 @@ public class FindInDictionary {
         return result;
     }
 
+    public boolean isKeyInDictionary(String key) {
+        return dictionary.containsKey(key);
+    }
+
     public String getValue(String key){
         return dictionary.get(key);
     }
