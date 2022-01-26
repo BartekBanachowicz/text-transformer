@@ -8,8 +8,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class ExchangeCurrencyTest {
 
@@ -24,6 +23,7 @@ public class ExchangeCurrencyTest {
         when(holder.getBid("EUR")).thenReturn(4.00F);
 
         Float result = ExchangeCalculator.calculate(holder,"EUR", "PLN", 20.00F);
+        verify(holder).getBid("EUR");
         assertEquals(result,80.00F);
     }
 
@@ -33,6 +33,7 @@ public class ExchangeCurrencyTest {
         when(holder.getAsk("EUR")).thenReturn(4.00F);
 
         Float result = ExchangeCalculator.calculate(holder,"PLN", "EUR", 80.00F);
+        verify(holder).getAsk("EUR");
         assertEquals(result,20.00F);
     }
 
@@ -43,6 +44,8 @@ public class ExchangeCurrencyTest {
         when(holder.getAsk("EUR")).thenReturn(4.00F);
 
         Float result = ExchangeCalculator.calculate(holder,"USD", "EUR", 35.00F);
+        verify(holder).getBid("USD");
+        verify(holder).getAsk("EUR");
         assertEquals(result,30.63F);
     }
 
@@ -53,6 +56,9 @@ public class ExchangeCurrencyTest {
         when(holder.getAsk("EUR")).thenReturn(4.00F);
 
         Float result = ExchangeCalculator.calculate(holder,"USD", "EUR", 35.00F);
+
+        verify(holder).getBid("USD");
+        verify(holder).getAsk("EUR");
 
         InOrder inOrder = Mockito.inOrder(holder);
         inOrder.verify(holder).getBid("USD");
